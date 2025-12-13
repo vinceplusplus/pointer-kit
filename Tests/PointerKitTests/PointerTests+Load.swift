@@ -15,7 +15,7 @@ extension PointerTests {
   @Test func loadArray() {
     let array = [42, 23]
 
-    withBuffer(array) { buffer in
+    withBuffer(array: array) { buffer in
       let pointer2 = Pointer<Float>(buffer.start)
 
       #expect(Array(pointer2.loadArray(Int.self, 2)) == array)

@@ -3,7 +3,7 @@ import Testing
 
 extension BufferTests {
   @Test func native() {
-    withBuffer([1, 2, 3, 4, 5]) { buffer in
+    withBuffer(array: [1, 2, 3, 4, 5]) { buffer in
       let unsafeBuffer = buffer.native()
 
       #expect(unsafeBuffer.count == 5)
@@ -17,7 +17,7 @@ extension BufferTests {
 
   @Test func mutableNative() {
     var array = [1, 2, 3, 4, 5]
-    withBuffer(&array) { buffer in
+    withBuffer(array: &array) { buffer in
       let unsafeBuffer = buffer.mutableNative()
 
       #expect(unsafeBuffer.count == 5)

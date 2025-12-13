@@ -1,5 +1,23 @@
 public func withBuffer<T, Result>(
-  _ array: [T],
+  element: T,
+  _ body: (Buffer<UInt8>) throws -> Result,
+) rethrows -> Result {
+  try withUnsafeBytes(of: element) {
+    try body(.init($0))
+  }
+}
+
+public func withBuffer<T, Result>(
+  element: inout T,
+  _ body: (Buffer<UInt8>) throws -> Result,
+) rethrows -> Result {
+  try withUnsafeMutableBytes(of: &element) {
+    try body(.init($0))
+  }
+}
+
+public func withBuffer<T, Result>(
+  array: [T],
   _ body: (Buffer<T>) throws -> Result,
 ) rethrows -> Result {
   try array.withUnsafeBufferPointer {
@@ -8,10 +26,10 @@ public func withBuffer<T, Result>(
 }
 
 public func withBuffer<T, Result>(
-  _ array: inout [T],
+  array: inout [T],
   _ body: (Buffer<T>) throws -> Result,
 ) rethrows -> Result {
-  try array.withUnsafeBufferPointer {
+  try array.withUnsafeMutableBufferPointer {
     try body(.init($0))
   }
 }

@@ -5,7 +5,7 @@ extension PointerTests {
   @Test func subscripting() {
     var array = [1, 2, 3]
 
-    withBuffer(&array) { buffer in
+    withBuffer(array: &array) { buffer in
       let start = buffer.start
 
       #expect(start[0] == 1)

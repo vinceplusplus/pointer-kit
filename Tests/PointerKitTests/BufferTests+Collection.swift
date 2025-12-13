@@ -3,7 +3,7 @@ import Testing
 
 extension BufferTests {
   @Test func collection() {
-    withBuffer([1, 2, 3]) { buffer in
+    withBuffer(array: [1, 2, 3]) { buffer in
       #expect(buffer[0] == 1)
       #expect(buffer[1] == 2)
       #expect(buffer[2] == 3)
@@ -13,7 +13,7 @@ extension BufferTests {
   @Test func mutableCollection() {
     var array = [1, 2, 3]
 
-    withBuffer(&array) { buffer in
+    withBuffer(array: &array) { buffer in
       #expect(buffer[0] == 1)
       #expect(buffer[1] == 2)
       #expect(buffer[2] == 3)
