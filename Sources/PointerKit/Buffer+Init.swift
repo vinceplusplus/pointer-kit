@@ -1,15 +1,24 @@
 public extension Buffer {
-  init<S>(_ start: Pointer<S>, _ count: Int) {
+  init<S>(_ buffer: Buffer<S>) {
     self.init(
-      start: .init(start),
-      count: count
+      start: buffer.start,
+      count: MemoryLayout<S>.stride * buffer.count / MemoryLayout<T>.stride
+    )
+  }
+}
+
+public extension Buffer {
+  init<S>(source: Pointer<S>, sourceCount: Int) {
+    self.init(
+      start: .init(source),
+      count: MemoryLayout<S>.stride * sourceCount / MemoryLayout<T>.stride
     )
   }
 
-  init<S>(_ buffer: Buffer<S>) {
+  init<S>(start: Pointer<S>, count: Int) {
     self.init(
-      buffer.start,
-      MemoryLayout<S>.stride * buffer.count / MemoryLayout<T>.stride
+      start: .init(start),
+      count: count
     )
   }
 }

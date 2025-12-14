@@ -144,29 +144,61 @@ extension BufferTests {
 }
 
 extension BufferTests {
-  @Test func unsafePointerCount() {
-    let buffer = Buffer<Int>(UnsafePointer<Int>(bitPattern: 0x1234)!, 5)
-
-    #expect(buffer.start.address == 0x1234)
-    #expect(buffer.count == 5)
-  }
-
-  @Test func unsafeMutablePointerCount() {
-    let buffer = Buffer<Int>(UnsafeMutablePointer<Int>(bitPattern: 0x1234)!, 5)
-
-    #expect(buffer.start.address == 0x1234)
-    #expect(buffer.count == 5)
-  }
-
   @Test func unsafeRawPointerCount() {
-    let buffer = Buffer<Int>(UnsafeRawPointer(bitPattern: 0x1234)!, 5)
+    let buffer = Buffer<Int64>(
+      bytes: UnsafeRawPointer(bitPattern: 0x1234)!,
+      byteCount: 40,
+    )
 
     #expect(buffer.start.address == 0x1234)
     #expect(buffer.count == 5)
   }
 
   @Test func unsafeMutableRawPointerCount() {
-    let buffer = Buffer<Int>(UnsafeMutableRawPointer(bitPattern: 0x1234)!, 5)
+    let buffer = Buffer<Int64>(
+      bytes: UnsafeMutableRawPointer(bitPattern: 0x1234)!,
+      byteCount: 40,
+    )
+
+    #expect(buffer.start.address == 0x1234)
+    #expect(buffer.count == 5)
+  }
+
+  @Test func differentTypeUnsafeSource() {
+    let buffer = Buffer<UInt8>(
+      source: UnsafePointer<Int64>(bitPattern: 0x1234)!,
+      sourceCount: 5,
+    )
+
+    #expect(buffer.start.address == 0x1234)
+    #expect(buffer.count == 40)
+  }
+
+  @Test func differentTypeUnsafeMutableSource() {
+    let buffer = Buffer<UInt8>(
+      source: UnsafeMutablePointer<Int64>(bitPattern: 0x1234)!,
+      sourceCount: 5,
+    )
+
+    #expect(buffer.start.address == 0x1234)
+    #expect(buffer.count == 40)
+  }
+
+  @Test func differentTypeUnsafeStartCount() {
+    let buffer = Buffer<UInt8>(
+      start: UnsafePointer<Int64>(bitPattern: 0x1234)!,
+      count: 5,
+    )
+
+    #expect(buffer.start.address == 0x1234)
+    #expect(buffer.count == 5)
+  }
+
+  @Test func differentTypeUnsafeMutableStartCount() {
+    let buffer = Buffer<UInt8>(
+      start: UnsafeMutablePointer<Int64>(bitPattern: 0x1234)!,
+      count: 5,
+    )
 
     #expect(buffer.start.address == 0x1234)
     #expect(buffer.count == 5)

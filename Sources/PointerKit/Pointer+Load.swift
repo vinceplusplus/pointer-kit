@@ -4,7 +4,7 @@ public extension Pointer {
   }
 
   func loadArray<S>(_ type: S.Type, _ count: Int) -> Buffer<S> {
-    .init(Pointer<T>.init(self), count)
+    .init(start: .init(self), count: count)
   }
 }
 

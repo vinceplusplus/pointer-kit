@@ -57,11 +57,27 @@ public extension Buffer {
 }
 
 public extension Buffer {
-  // NOTE: can take UnsafePointer<T>, UnsafeMutablePointer<T>, UnsafeMutableRawPointer as well
-  init(_ start: UnsafeRawPointer, _ count: Int) {
+  // NOTE: can also take UnsafeMutableRawPointer
+  init(bytes: UnsafeRawPointer, byteCount: Int) {
+    self.init(
+      start: .init(bytes),
+      count: byteCount / MemoryLayout<T>.stride,
+    )
+  }
+
+  // NOTE: can also take UnsafeMutablePointer<S>
+  init<S>(source: UnsafePointer<S>, sourceCount: Int) {
+    self.init(
+      start: .init(source),
+      count: MemoryLayout<S>.stride * sourceCount / MemoryLayout<T>.stride,
+    )
+  }
+
+  // NOTE: can also take UnsafeMutablePointer<S>
+  init<S>(start: UnsafePointer<S>, count: Int) {
     self.init(
       start: .init(start),
-      count: count
+      count: count,
     )
   }
 }
