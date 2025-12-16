@@ -1,4 +1,4 @@
 public extension Pointer {
-  static var `nil`: Pointer<UInt8> { .init(0) }
+  static var `nil`: Pointer<T> { .init(0) }
 }
 
