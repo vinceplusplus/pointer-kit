@@ -12,5 +12,10 @@ struct PointerTests {
       #expect(pointer.pointee == 42)
     }
   }
+
+  @Test func isNil() {
+    #expect(Pointer<UInt8>(0).isNil == true)
+    #expect(Pointer<UInt8>(0x1234).isNil == false)
+  }
 }
 

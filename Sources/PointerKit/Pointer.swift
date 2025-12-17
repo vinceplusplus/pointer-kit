@@ -7,5 +7,9 @@ public extension Pointer {
     get { native().pointee }
     nonmutating set { mutableNative().pointee = newValue }
   }
+
+  var isNil: Bool {
+    get { address == 0 }
+  }
 }
 

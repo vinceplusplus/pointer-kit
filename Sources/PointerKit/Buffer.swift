@@ -3,3 +3,9 @@ public struct Buffer<T>: Hashable {
   public let count: Int
 }
 
+public extension Buffer {
+  var isNil: Bool {
+    get { start.isNil }
+  }
+}
+
