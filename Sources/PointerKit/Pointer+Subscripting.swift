@@ -4,7 +4,7 @@ public extension Pointer {
       native()[position]
     }
     nonmutating set {
-      mutableNative()[position] = newValue
+      nativeMutable()[position] = newValue
     }
   }
 }

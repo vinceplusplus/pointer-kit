@@ -1,4 +1,4 @@
 public extension Buffer {
-  static var `nil`: Buffer<T> { .init(start: Pointer<Int>(0), count: 0) }
+  static var `nil`: Buffer<T> { .init(start: Pointer<T>(0), count: 0) }
 }
 

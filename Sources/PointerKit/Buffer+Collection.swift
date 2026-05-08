@@ -11,7 +11,7 @@ extension Buffer: Collection {
       native()[position]
     }
     nonmutating set {
-      mutableNative()[position] = newValue
+      nativeMutable()[position] = newValue
     }
   }
 }
