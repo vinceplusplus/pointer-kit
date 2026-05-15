@@ -172,6 +172,20 @@ Buffer<Int64>.zeros(4) { buffer in
 }
 ```
 
+### Buffer.allocate & deallocate
+
+```swift
+let buffer = Buffer<Int32>.allocate(count: 4)
+
+buffer[0] = 42
+buffer[1] = 84
+
+print(buffer[0]) // 42
+print(buffer[1]) // 84
+
+buffer.deallocate()
+```
+
 ### Type reinterpretation
 
 ```swift
@@ -204,7 +218,7 @@ Add to your `Package.swift`:
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/vinceplusplus/pointer-kit", from: "2.0.0"),
+  .package(url: "https://github.com/vinceplusplus/pointer-kit", from: "2.1.0"),
 ]
 ```
 
@@ -242,6 +256,7 @@ dependencies: [
 | [`Buffer+Init`](Sources/PointerKit/Buffer+Init.swift)             | `init(_: Buffer<S>)`, `init(source:sourceCount:)`, `init(start:count:)`                                                                        |
 | [`Buffer+Static`](Sources/PointerKit/Buffer+Static.swift)         | `.nil`                                                                                                                                         |
 | [`Buffer+Collection`](Sources/PointerKit/Buffer+Collection.swift) | Conforms to `Collection` and `MutableCollection`                                                                                               |
+| [`Buffer+Allocation`](Sources/PointerKit/Buffer+Allocation.swift) | `allocate(count:alignment:)`, `deallocate()`                                                                                                   |
 | [`Buffer+Misc`](Sources/PointerKit/Buffer+Misc.swift)             | `zeros(_:_:)`                                                                                                                                  |
 | [`Buffer+Native`](Sources/PointerKit/Buffer+Native.swift)         | `native()`, `nativeMutable()`, `nativeRaw()`, `nativeMutableRaw()`                                                                             |
 | [`Buffer+NativeInit`](Sources/PointerKit/Buffer+NativeInit.swift) | Inits from `UnsafeBufferPointer`, `UnsafeMutableBufferPointer`, `UnsafeRawBufferPointer`, `UnsafeMutableRawBufferPointer`, raw pointer + count |
